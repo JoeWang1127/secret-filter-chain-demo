@@ -44,7 +44,10 @@ public class SecurityConfiguration {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(authz -> authz.requestMatchers("/topsecret").authenticated())
+    http.authorizeHttpRequests(authz ->
+            authz
+                .requestMatchers("/").anonymous()
+                .requestMatchers("/topsecret").authenticated())
         .oauth2ResourceServer()
         .jwt()
         .and()
